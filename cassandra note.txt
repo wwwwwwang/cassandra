@@ -1,0 +1,127 @@
+CREATE KEYSPACE w WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 3};
+
+
+use w;
+describe w;
+describe keyspaces;
+
+
+ALTER KEYSPACE "KeySpace Name"  
+WITH replication = {'class': 'Strategy name', 'replication_factor' : 'No.Of  replicas'};
+
+Alter Keyspace KeyspaceName with replication={'class':'StrategyName',   
+    'replication_factor': no of replications on different nodes}   
+        with DURABLE_WRITES=true/false
+		
+ALTER KEYSPACE w  WITH replication = {'class':'NetworkTopologyStrategy', 'replication_factor' : 1};
+
+DROP  keyspace KeyspaceName ;
+
+drop w;
+
+Create table TableName  
+(  
+    ColumnName DataType,  
+    ColumnName DataType,  
+    ColumnName DataType  
+    .  
+    .  
+    .  
+    Primary key(ColumnName)  
+) with PropertyName=PropertyValue;
+
+
+CREATE TABLE student(  
+   student_id int PRIMARY KEY,  
+   student_name text,  
+   student_city text,  
+   student_fees varint,  
+   student_phone varint  
+);
+
+describe tables
+describe columnfamilies
+
+
+ALTER TABLE table name  ADD new column datatype;
+ALTER TABLE student ADD student_email text;
+
+ALTER table name  DROP column name;
+ALTER TABLE student DROP student_email;
+
+
+DROP TABLE <tablename>
+
+DROP TABLE student;
+
+TRUNCATE <tablename>
+
+CREATE INDEX <identifier> ON <tablename>
+创建索引的规则
+    由于主键已编入索引，因此无法在主键上创建索引。
+    在Cassandra中，不支持集合索引。
+    没有对列进行索引，Cassandra无法过滤该列，除非它是主键。
+	
+CREATE INDEX name ON student (student_name);
+
+
+DROP INDEX <identifier>
+Drop index IF EXISTS KeyspaceName.IndexName
+
+drop INDEX w.name ;
+
+
+BEGIN BATCH  
+<insert-stmt>/ <update-stmt>/ <delete-stmt>  
+APPLY BATCH
+
+BEGIN BATCH
+INSERT INTO student(student_id, student_fees, student_name) values(4, 5500, 'Sumlee');
+UPDATE student SET student_fees=8000 WHERE  student_id=3;
+DELETE student_fees FROM student WHERE student_id=2;
+APPLY BATCH;
+
+SELECT FROM <table name> WHERE <condition>;
+注意：WHERE子句只能在作为主键的一部分的列，或者在其上具有辅助索引上使用。
+
+UPDATE <tablename>  
+SET <column name> = <new value>  
+<column name> = <value>....  
+WHERE <condition>
+
+Update KeyspaceName.TableName   
+Set ColumnName1=new Column1Value,  
+      ColumnName2=new Column2Value,  
+      ColumnName3=new Column3Value,  
+       .  
+       .  
+       .  
+Where ColumnName=ColumnValue
+
+UPDATE student SET student_fees=10000,student_name='XunWang' WHERE student_id=2;
+
+DELETE FROM <identifier> WHERE <condition>;
+DELETE FROM student WHERE student_id=3;
+DELETE student_fees FROM student WHERE student_id=2;
+
+
+
+CREATE TABLE t(  
+   did text PRIMARY KEY,  
+   tag text,  
+   os int  
+);
+
+
+CREATE TABLE tt(  
+   did text PRIMARY KEY,  
+   tag set<text>,  
+   os int  
+);
+
+CREATE TABLE test(  
+   word text PRIMARY KEY,   
+   cnt int  
+);
+
+
